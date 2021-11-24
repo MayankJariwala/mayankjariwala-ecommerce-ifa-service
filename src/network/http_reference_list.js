@@ -1,0 +1,31 @@
+STATUS_CODES = {
+	"SERVER_ERROR": 500,
+	"NOT_FOUND": 404,
+	"FOUND": 302,
+	"OK": 200,
+	"BAD_REQUEST": 400,
+	"FORBIDDEN": 403,
+	"NO_CONTENT": 204,
+	"UNAUTHORIZED": 401,
+	"CREATED": 201
+};
+HTTP_METHODS = {
+	"PUT": "PUT",
+	"GET": "GET",
+	"POST": "POST",
+	"DELETE": "DELETE",
+	"HEAD": "HEAD"
+};
+
+SEVERITY_LEVEL = {
+	EXCEPTION: "exception",
+	ERROR: "error",
+	SUCCESS: "success"
+};
+
+module.exports = {
+	HTTP_METHODS,
+	SEVERITY_LEVEL,
+	STATUS_CODES
+};
+

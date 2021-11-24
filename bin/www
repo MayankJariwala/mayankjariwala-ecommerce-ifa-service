@@ -1,0 +1,83 @@
+#!/usr/bin/env node
+
+var app = require("src/app");
+var http = require("http");
+const config = require("src/config/mapper");
+const loggers = require("src/utils/loggers");
+const {connect_mongo} = require("src/db/connection");
+
+/**
+ * Get port from environment and store in Express.
+ */
+var port = normalizePort(config.app.port || "3000");
+app.set("port", config.app.port);
+
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+
+  var bind = typeof port === "string"
+      ? "Pipe " + port
+      : "Port " + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case "EACCES":
+      loggers.error(__filename + " " + bind + " requires elevated privileges");
+      loggers.exit(1);
+      break;
+    case "EADDRINUSE":
+      loggers.error(__filename + " " + bind + " is already in use");
+      process.exit(1);
+      break;
+    default:
+      loggers.error(__filename + " Unknown Error " + error);
+      break;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+let intervalId = null;
+intervalId = setInterval(function () {
+  const mongo_status_flag = process.env.MONGO_ENABLED === "true" ? connect_mongo() : true;
+  if (mongo_status_flag === true) {
+    clearInterval(intervalId);
+    server.listen(config.app.port, () => {
+          loggers.log(__filename, `E-commerce platform Server is up with the base uri: (${config.app.uri})`);
+        }
+    );
+    server.on("error", onError);
+  }
+}, 1000);
