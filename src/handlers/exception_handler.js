@@ -5,20 +5,16 @@ module.exports = (function () {
 	const ExceptionHandler = function (e, response_instance) {
 		switch (e.name) {
 			// Custom exceptions error/exception
-			case "UserNotApprovedException":
 			case "UserNotFoundException":
 			case "CredentialsFailedException":
+			case "ProductLinkedToCategoryException":
 			case "InvalidRequestException":
 			case "InvalidNumberException":
 			case "EmailInvalidException":
 			case "EmptyFieldException":
 			case "FileWriteException":
-			case "ExchangeRateExceptions":
 			case "PasswordNotMatchException":
 			case "RecordNotFoundException":
-			case "InvalidBidDecisionException":
-			case "InvalidCSVFileException":
-			case "UserAccountSuspendedException":
 				return e.sendAppResponse(response_instance);
 
 			// The mongoose related errors

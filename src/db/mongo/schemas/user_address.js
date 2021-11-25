@@ -1,9 +1,14 @@
+const _ = require("lodash");
 const mongoose = require("mongoose/index");
 const {Schema} = mongoose;
 
 
 const UserAddressSchema = new Schema({
-		user_id: String,
+		user_id: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "users",
+				required: true
+		},
 		address_line_1: {
 				type: String,
 				required: [true, "Address line 1 is required"]
@@ -27,6 +32,10 @@ const UserAddressSchema = new Schema({
 }).index({
 		type: 1
 });
+
+UserAddressSchema.path("user_id").validate(function (v) {
+		return _.$isEmpty(v);
+}, "Address should belong to user (User reference is missing)");
 
 
 module.exports = {UserAddressSchema};

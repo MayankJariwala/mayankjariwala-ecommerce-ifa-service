@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const uuid = require("uuid");
 const mongoose = require("mongoose/index");
 const {Schema} = mongoose;
@@ -43,6 +44,10 @@ const ProductSchema = new Schema({
 }).index({
 		type: 1
 });
+
+ProductSchema.path("category_id").validate(function (v) {
+		return v.length > 0;
+}, "Product should belong to category");
 
 
 module.exports = {ProductSchema};

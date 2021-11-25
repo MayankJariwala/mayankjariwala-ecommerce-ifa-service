@@ -44,4 +44,37 @@ AuthController.prototype.register = async (req, res, next) => {
 		}
 };
 
+AuthController.prototype.login = async (req, res, next) => {
+		try {
+				const response = await user_repository.find_by_email_password(req.body);
+				const session_token = response.session_token;
+				delete response.session_token;
+				loggers.log(`User is logged in successfully`);
+				res.setHeader("x-session-token", session_token);
+				return res
+						.status(STATUS_CODES.OK)
+						.json(response);
+		} catch (e) {
+				loggers.log(`Login Request Failed: ${e}`, __filename);
+				return ExceptionHandler(e, res);
+		}
+};
+
+AuthController.prototype.login = async (req, res, next) => {
+		try {
+				const response = await user_repository.find_by_email_password(req.body);
+				const session_token = response.session_token;
+				delete response.session_token;
+				loggers.log(`User is logged in successfully`);
+				res.setHeader("x-session-token", session_token);
+				return res
+						.status(STATUS_CODES.OK)
+						.json(response);
+		} catch (e) {
+				loggers.log(`Login Request Failed: ${e}`, __filename);
+				return ExceptionHandler(e, res);
+		}
+};
+
+
 module.exports = new AuthController();

@@ -5,6 +5,7 @@ var logger = require("morgan");
 
 var auth_router = require("src/network/routes/auth");
 var products_router = require("src/network/routes/products");
+var products_categories_router = require("src/network/routes/products_categories");
 
 
 var app = express();
@@ -18,5 +19,6 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.use("/", indexRouter);
 app.use("/v1/auth", auth_router);
 app.use("/v1/products", products_router);
+app.use("/v1/categories", products_categories_router);
 
 module.exports = app;

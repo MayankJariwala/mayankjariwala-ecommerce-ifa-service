@@ -1,5 +1,6 @@
 const uuid = require("uuid");
 const mongoose = require("mongoose/index");
+const {get_hash_value} = require("src/utils/helpers");
 const {Schema} = mongoose;
 
 
@@ -43,6 +44,9 @@ const UserSchema = new Schema({
 						message: "{VALUE} is not supported"
 				},
 				default: "User"
+		},
+		session_token: {
+				type: String
 		}
 }, {
 		useNestedStrict: true,
@@ -51,11 +55,19 @@ const UserSchema = new Schema({
 		type: 1
 });
 
+UserSchema.pre("save", function (next) {
+		var user = this;
+		if (!user.isModified("password")) return next();
+		user.password = get_hash_value(user.password);
+		next();
+
+});
+
+// validation
 UserSchema.path("mobile").validate(function (v) {
 		var re = /^\d{10}$/;
 		return (v == null || v.trim().length < 1) || re.test(v);
 }, "Please enter a valid phone");
-
 
 UserSchema.path("email").validate(function (v) {
 		var re = /^([\w-.]+@([\w-]+\.)+[\w-]{2,4})?$/;

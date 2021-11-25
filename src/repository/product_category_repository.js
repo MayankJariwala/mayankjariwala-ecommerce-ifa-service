@@ -4,7 +4,9 @@
  * @version 1.0.0
  */
 const {product_categories} = require("src/db/mongo/schema_registry");
+const {count_product_by_category_id} = require("src/repository/product_repository");
 const loggers = require("src/utils/loggers");
+const {ProductLinkedToCategoryException} = require("src/exceptions/query_exceptions");
 
 
 /**
@@ -31,5 +33,30 @@ ProductCategoryRepository.prototype.create = async (category, session) => {
 		});
 };
 
+ProductCategoryRepository.prototype.get_all = async () => {
+		return await product_categories.find({}, {
+				"__v": 0
+		}).sort({"updatedAt": -1});
+};
+
+ProductCategoryRepository.prototype.find_by_id = async (id) => {
+		return await product_categories.findOne(
+				{"_id": id},
+				{
+						"__v": 0
+				}
+		);
+};
+
+ProductCategoryRepository.prototype.delete_by_id = async (id) => {
+		const count = await count_product_by_category_id(id);
+		if (count > 0) {
+				throw new ProductLinkedToCategoryException("Products are linked to this category");
+		}
+		return await product_categories.deleteOne({
+						"_id": id
+				}
+		);
+};
 
 module.exports = class_instance;
