@@ -1,6 +1,7 @@
 const _ = require("lodash");
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
+const {GeneralValidationException} = require("src/exceptions/validation_exception");
 
 
 const UserPaymentSchema = new Schema({
@@ -54,7 +55,7 @@ UserPaymentSchema.path("user_id").validate(async function (v) {
 		const {users} = require("src/db/mongo/schema_registry");
 		const isUserExists = await users.exists({_id: v});
 		if (!isUserExists) {
-				throw  new Error("User not found");
+				throw  new GeneralValidationException("User not found");
 		}
 		return true;
 }, "User not found");
@@ -63,7 +64,7 @@ UserPaymentSchema.path("card_number").validate(async function (v) {
 		const {user_payments} = require("src/db/mongo/schema_registry");
 		const isCardExists = await user_payments.exists({"card_number": v});
 		if (isCardExists) {
-				throw  new Error("Card already Exists");
+				throw  new GeneralValidationException("Card already Exists");
 		}
 		return true;
 }, "Card already exists");
@@ -72,7 +73,7 @@ UserPaymentSchema.path("card_number").validate(function (v) {
 		const valid = require("card-validator");
 		const numberValidation = valid.number(v);
 		if (!numberValidation.isValid) {
-				throw new Error("Card number is not valid");
+				throw new GeneralValidationException("Card number is not valid");
 		}
 		return true;
 }, "Card number is not valid");
@@ -82,38 +83,38 @@ UserPaymentSchema.path("cvv").validate(async function (v) {
 		const valid = require("card-validator");
 		const cvvValidation = valid.cvv(v);
 		if (!cvvValidation.isValid) {
-				throw new Error("Card CVV is not valid");
+				throw new GeneralValidationException("Card CVV is not valid");
 		}
 		const isCvvExists = await user_payments.exists({"cvv": v});
 		if (isCvvExists) {
-				throw  new Error("Card CVV already Exists");
+				throw  new GeneralValidationException("Card CVV already Exists");
 		}
 		return true;
 }, "Card CVV is not valid");
 
 UserPaymentSchema.path("expiry_month").validate(function (v) {
 		if (isNaN(v)) {
-				throw new Error("Card expiry month is not a number");
+				throw new GeneralValidationException("Card expiry month is not a number");
 		}
 		if (v.toString().length !== 2) {
-				throw new Error("Card expiry year should be in mm format");
+				throw new GeneralValidationException("Card expiry year should be in mm format");
 		}
 		if (v > 12 || v < 1) {
-				throw new Error("Card expiry year is not valid");
+				throw new GeneralValidationException("Card expiry year is not valid");
 		}
 		return true;
 }, "Card expiry month  is not valid");
 
 UserPaymentSchema.path("expiry_year").validate(function (v) {
 		if (isNaN(v)) {
-				throw new Error("Card expiry year is not a number");
+				throw new GeneralValidationException("Card expiry year is not a number");
 		}
 		if (v.toString().length !== 4) {
-				throw new Error("Card expiry year should be in yyyy format");
+				throw new GeneralValidationException("Card expiry year should be in yyyy format");
 		}
 		const year = new Date().getFullYear();
 		if (v < year) {
-				throw new Error("Card expiry year is not valid");
+				throw new GeneralValidationException("Card expiry year is not valid");
 		}
 		return true;
 }, "Card expiry year is not valid");

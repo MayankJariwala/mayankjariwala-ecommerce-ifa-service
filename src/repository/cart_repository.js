@@ -3,6 +3,7 @@
  * @author Mayank Jariwala
  * @version 1.0.0
  */
+const {GeneralValidationException} = require("src/exceptions/validation_exception");
 const {shopping_sessions, cart_items, products} = require("src/db/mongo/schema_registry");
 const {db_instance} = require("src/db/connection");
 
@@ -52,7 +53,7 @@ CartRepository.prototype.add_item_in_session = async (add_item_model) => {
 								});
 								console.log(update_response);
 								if (update_response.modifiedCount === 0) {
-										throw new Error("Item updating failed");
+										throw new GeneralValidationException("Item updating failed");
 								}
 								const product_response = await products.findOne({"_id": add_item_model.product_id}, {
 										price: 1
@@ -71,7 +72,7 @@ CartRepository.prototype.add_item_in_session = async (add_item_model) => {
 						throw e;
 				}
 		}
-		throw new Error("Session not exists");
+		throw new GeneralValidationException("Session not exists");
 };
 
 module.exports = class_instance;

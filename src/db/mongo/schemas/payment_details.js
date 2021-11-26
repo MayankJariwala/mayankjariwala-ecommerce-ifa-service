@@ -16,25 +16,17 @@ const PaymentDetailSchema = new Schema({
 				type: Number,
 				required: [true, "Amount is required"]
 		},
-		provider: {
-				type: String,
-				required: [true, "Provider is required"]
-		},
 		status: {
 				type: String,
 				enum: {
 						values: [
-								"Canceled_Reversal",
-								"Created",
-								"Denied",
-								"Expired",
-								"Failed",
-								"Pending",
-								"Refunded",
-								"Processed"
+								"PAID",
+								"REJECTED"
 						],
 						message: "{VALUE} is not supported"
-				}
+				},
+				// temporary for demo purpose
+				default: "PAID"
 		}
 }, {
 		useNestedStrict: true,
@@ -45,11 +37,11 @@ const PaymentDetailSchema = new Schema({
 
 
 PaymentDetailSchema.path("order_id").validate(function (v) {
-		return _.$isEmpty(v);
+		return _.isEmpty(v);
 }, "Order Reference Id is missing");
 
 PaymentDetailSchema.path("payment_id").validate(function (v) {
-		return _.$isEmpty(v);
+		return _.isEmpty(v);
 }, "Payment Reference Id is missing");
 
 

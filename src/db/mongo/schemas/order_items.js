@@ -1,48 +1,21 @@
-const uuid = require("uuid");
-const mongoose = require("mongoose/index");
+const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
 
-const UserSchema = new Schema({
-		accountId: {
-				type: String,
-				required: true,
-				default: function genUUID() {
-						return uuid.v4();
-				}
+const OrderItemSchema = new Schema({
+		order_id: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "order_details",
+				required: true
 		},
-		first_name: {
-				type: String,
-				required: [true, "First name is required"]
+		product_id: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "products",
+				required: true
 		},
-		last_name: {
-				type: String,
-				required: [true, "Last name is required"]
-		},
-		email: {
-				type: String,
-				required: [true, "Email is required"]
-		},
-		username: {
-				type: String,
-				index: true,
-				required: [true, "Username is required"]
-		},
-		password: {
-				type: String,
-				required: [true, "Password is required"]
-		},
-		mobile: {
-				type: String,
-				required: [true, "Mobile is required"]
-		},
-		type: {
-				type: String,
-				enum: {
-						values: ["user", "admin"],
-						message: "{VALUE} is not supported"
-				},
-				default: "User"
+		quantity: {
+				type: Number,
+				default: 0
 		}
 }, {
 		useNestedStrict: true,
@@ -51,16 +24,20 @@ const UserSchema = new Schema({
 		type: 1
 });
 
-UserSchema.path("mobile").validate(function (v) {
-		var re = /^\d{10}$/;
-		return (v == null || v.trim().length < 1) || re.test(v);
-}, "Please enter a valid phone");
+OrderItemSchema.path("order_id").validate(async function (v) {
+		const {orders} = require("src/db/mongo/schema_registry");
+		const isOrderExists = await orders.exists({_id: v});
+		if (!isOrderExists) {
+				throw  new GeneralValidationException(`Order ${v} not found`);
+		}
+}, "Order not found");
 
+OrderItemSchema.path("product_id").validate(async function (v) {
+		const {products} = require("src/db/mongo/schema_registry");
+		const isProductExists = await products.exists({_id: v});
+		if (!isProductExists) {
+				throw  new GeneralValidationException(`Product ${v} not found`);
+		}
+}, "Product not found");
 
-UserSchema.path("email").validate(function (v) {
-		var re = /^([\w-.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-		return re.test(v);
-}, "Please enter a valid email");
-
-
-module.exports = {UserSchema};
+module.exports = {OrderItemSchema};

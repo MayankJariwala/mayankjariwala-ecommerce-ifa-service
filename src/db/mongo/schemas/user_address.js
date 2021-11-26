@@ -1,5 +1,6 @@
 const mongoose = require("mongoose/index");
 const {Schema} = mongoose;
+const {GeneralValidationException} = require("src/exceptions/validation_exception");
 
 
 const UserAddressSchema = new Schema({
@@ -38,12 +39,12 @@ const UserAddressSchema = new Schema({
 
 UserAddressSchema.path("user_id").validate(async function (v) {
 		if (v.toString().length === 0) {
-				throw new Error("Address should belong to user (User reference is missing)");
+				throw new GeneralValidationException("Address should belong to user (User reference is missing)");
 		}
 		const {users} = require("src/db/mongo/schema_registry");
 		const isUserExists = await users.exists({_id: v});
 		if (!isUserExists) {
-				throw  new Error("User not found");
+				throw  new GeneralValidationException("User not found");
 		}
 		return true;
 }, "Address should belong to user (User reference is missing)");

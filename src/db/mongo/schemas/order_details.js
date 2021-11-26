@@ -1,16 +1,8 @@
-const uuid = require("uuid");
 const mongoose = require("mongoose/index");
 const {Schema} = mongoose;
 
 
 const OrderDetailSchema = new Schema({
-		order_id: {
-				type: String,
-				required: true,
-				default: function genUUID() {
-						return uuid.v4();
-				}
-		},
 		user_id: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: "users"
@@ -29,6 +21,23 @@ const OrderDetailSchema = new Schema({
 }).index({
 		type: 1
 });
+
+
+OrderDetailSchema.path("user_id").validate(async function (v) {
+		const {users} = require("src/db/mongo/schema_registry");
+		const isUserExists = await users.exists({_id: v});
+		if (!isUserExists) {
+				throw  new GeneralValidationException(`User ${v} not found`);
+		}
+}, "User not found");
+
+OrderDetailSchema.path("payment_id").validate(async function (v) {
+		const {user_payments} = require("src/db/mongo/schema_registry");
+		const isPaymentExists = await user_payments.exists({_id: v});
+		if (!isPaymentExists) {
+				throw  new GeneralValidationException(`Payment reference ${v} not found`);
+		}
+}, "Payment reference not found");
 
 
 module.exports = {OrderDetailSchema};

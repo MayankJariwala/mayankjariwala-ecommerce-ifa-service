@@ -2,6 +2,7 @@ const _ = require("lodash");
 const uuid = require("uuid");
 const mongoose = require("mongoose/index");
 const {Schema} = mongoose;
+const {GeneralValidationException} = require("src/exceptions/validation_exception");
 
 
 const ProductSchema = new Schema({
@@ -53,12 +54,12 @@ const ProductSchema = new Schema({
 
 ProductSchema.path("category_id").validate(async function (v) {
 		if (v.length <= 0) {
-				throw  new Error("Product should belong to at least one category");
+				throw  new GeneralValidationException("Product should belong to at least one category");
 		}
 		const {product_categories} = require("src/db/mongo/schema_registry");
 		const isCategoryExists = await product_categories.exists({_id: v});
 		if (!isCategoryExists) {
-				throw  new Error("Category not found");
+				throw  new GeneralValidationException("Category not found");
 		}
 }, "Product should belong to category");
 

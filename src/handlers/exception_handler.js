@@ -3,6 +3,7 @@ const {STATUS_CODES, SEVERITY_LEVEL} = require("src/network/http_reference_list"
 module.exports = (function () {
 
 		const ExceptionHandler = function (e, response_instance) {
+
 				switch (e.name) {
 						// Custom exceptions error/exception
 						case "UserNotFoundException":
@@ -12,6 +13,7 @@ module.exports = (function () {
 						case "InvalidNumberException":
 						case "EmailInvalidException":
 						case "EmptyFieldException":
+						case "GeneralValidationException":
 						case "FileWriteException":
 						case "PasswordNotMatchException":
 						case "RecordNotFoundException":
