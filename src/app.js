@@ -6,6 +6,8 @@ const cors = require("cors");
 
 var auth_router = require("src/network/routes/auth");
 var products_router = require("src/network/routes/products");
+var users_router = require("src/network/routes/users");
+var payments_router = require("src/network/routes/payments");
 var products_categories_router = require("src/network/routes/products_categories");
 
 
@@ -21,6 +23,8 @@ app.use(cors()); // Use this after the variable declaration
 // app.use("/", indexRouter);
 app.use("/v1/auth", auth_router);
 app.use("/v1/products", products_router);
+app.use("/v1/users", users_router);
+app.use("/v1/payments", payments_router);
 app.use("/v1/categories", products_categories_router);
 
 module.exports = app;

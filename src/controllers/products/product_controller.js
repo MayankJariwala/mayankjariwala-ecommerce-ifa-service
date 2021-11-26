@@ -21,7 +21,7 @@ ProductController.prototype.create = async (req, res, next) => {
 						.status(STATUS_CODES.OK)
 						.json(response_payload(200, "Product Created"));
 		} catch (e) {
-				loggers.log(__filename, `Transaction has been rolled back`);
+				loggers.log(__filename, `Product registration failed ${e}`);
 				return ExceptionHandler(e, res);
 		}
 };

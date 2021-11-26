@@ -14,18 +14,14 @@ function ProductCategoryController() {
 }
 
 ProductCategoryController.prototype.create = async (req, res, next) => {
-		const session = await db_instance.mongo.instance.startSession();
 		try {
-				session.startTransaction();
 				const response = await product_category_repository.create(req.body, session);
-				await session.commitTransaction();
 				loggers.log(`Product Category is registered successfully with id ${response._id}`);
 				return res
 						.status(STATUS_CODES.OK)
 						.json(response_payload(200, "Successfully Registered"));
 		} catch (e) {
-				session.inTransaction() && await session.abortTransaction();
-				loggers.log(__filename, `Transaction has been rolled back`);
+				loggers.log(__filename, `Product Category creation failed ${e}`);
 				return ExceptionHandler(e, res);
 		}
 };
