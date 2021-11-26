@@ -1,5 +1,4 @@
 const product_category_repository = require("src/repository/product_category_repository");
-const {db_instance} = require("src/db/connection");
 const loggers = require("src/utils/loggers");
 const {response_payload} = require("src/network/responses/response");
 const {STATUS_CODES} = require("src/network/http_reference_list");
@@ -15,8 +14,7 @@ function ProductCategoryController() {
 
 ProductCategoryController.prototype.create = async (req, res, next) => {
 		try {
-				const response = await product_category_repository.create(req.body, session);
-				loggers.log(`Product Category is registered successfully with id ${response._id}`);
+				await product_category_repository.create(req.body);
 				return res
 						.status(STATUS_CODES.OK)
 						.json(response_payload(200, "Successfully Registered"));

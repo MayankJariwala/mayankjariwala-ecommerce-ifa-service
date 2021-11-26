@@ -16,7 +16,10 @@ const ProductCategorySchema = new Schema({
 				required: [true, "Product name is required"]
 		},
 		description: String,
-		deleted_at: Date
+		deleted_at: {
+				type: Date,
+				required: false
+		}
 }, {
 		useNestedStrict: true,
 		timestamps: true

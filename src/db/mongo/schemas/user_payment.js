@@ -37,6 +37,10 @@ const UserPaymentSchema = new Schema({
 				type: String,
 				required: [true, "Card CVV is required"],
 				unique: [true, "Card CVV is already use by other card"]
+		},
+		deleted_at: {
+				type: Date,
+				required: false
 		}
 }, {
 		useNestedStrict: true,

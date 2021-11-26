@@ -7,9 +7,7 @@ const {users} = require("src/db/mongo/schema_registry");
 const loggers = require("src/utils/loggers");
 const {generate_session_token} = require("src/utils/helpers");
 const bcrypt = require("bcrypt");
-const {CredentialsFailedException, EmailAlreadyExists, UserAccountSuspendedException, UserNotApprovedException, UserNotFoundException} = require("src/exceptions/auth_exceptions");
-const {RecordNotFoundException} = require("src/exceptions/query_exceptions");
-const moment = require("moment-timezone");
+const {CredentialsFailedException, UserNotFoundException} = require("src/exceptions/auth_exceptions");
 
 
 /**
@@ -21,10 +19,10 @@ function AuthRepository() {
 
 const class_instance = new AuthRepository();
 
-AuthRepository.prototype.create = async (user_model, session) => {
+AuthRepository.prototype.create = async (user_model) => {
 		const mongoose_user_model = new users(user_model);
 		return await new Promise(async (resolve, reject) => {
-				await mongoose_user_model.save({session}, function (error, user_model) {
+				await mongoose_user_model.save({}, function (error, user_model) {
 						if (error) {
 								loggers.error(__filename, `User Registration process  failed [ERROR: ${error}]`);
 								reject(error);

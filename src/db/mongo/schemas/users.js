@@ -47,6 +47,10 @@ const UserSchema = new Schema({
 		},
 		session_token: {
 				type: String
+		},
+		deleted_at: {
+				type: Date,
+				required: false
 		}
 }, {
 		useNestedStrict: true,

@@ -15,8 +15,7 @@ function ProductController() {
 
 ProductController.prototype.create = async (req, res, next) => {
 		try {
-				const response = await product_repository.create(req.body);
-				loggers.log(`Product is registered successfully with id ${response._id}`);
+				await product_repository.create(req.body);
 				return res
 						.status(STATUS_CODES.OK)
 						.json(response_payload(200, "Product Created"));
@@ -28,8 +27,7 @@ ProductController.prototype.create = async (req, res, next) => {
 
 ProductController.prototype.update = async (req, res, next) => {
 		try {
-				const response = await product_repository.update(req.params.id, req.body);
-				loggers.log(`Product is registered successfully with id ${response._id}`);
+				await product_repository.update(req.params.id, req.body);
 				return res
 						.status(STATUS_CODES.OK)
 						.json(response_payload(200, "Product Created"));

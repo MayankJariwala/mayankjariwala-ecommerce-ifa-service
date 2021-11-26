@@ -18,10 +18,10 @@ function ProductCategoryRepository() {
 
 const class_instance = new ProductCategoryRepository();
 
-ProductCategoryRepository.prototype.create = async (category, session) => {
+ProductCategoryRepository.prototype.create = async (category) => {
 		const mongoose_products_category_model = new product_categories(category);
 		return await new Promise(async (resolve, reject) => {
-				await mongoose_products_category_model.save({session}, function (error, saved_category) {
+				await mongoose_products_category_model.save({}, function (error, saved_category) {
 						if (error) {
 								loggers.error(__filename, `Product Category Registration process failed [ERROR: ${error}]`);
 								reject(error);

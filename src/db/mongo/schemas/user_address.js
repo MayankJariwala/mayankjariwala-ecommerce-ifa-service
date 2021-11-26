@@ -1,4 +1,3 @@
-const _ = require("lodash");
 const mongoose = require("mongoose/index");
 const {Schema} = mongoose;
 
@@ -25,6 +24,10 @@ const UserAddressSchema = new Schema({
 		country: {
 				type: String,
 				required: [true, "Country is required"]
+		},
+		deleted_at: {
+				type: Date,
+				required: false
 		}
 }, {
 		useNestedStrict: true,
@@ -33,8 +36,16 @@ const UserAddressSchema = new Schema({
 		type: 1
 });
 
-UserAddressSchema.path("user_id").validate(function (v) {
-		return _.$isEmpty(v);
+UserAddressSchema.path("user_id").validate(async function (v) {
+		if (v.toString().length === 0) {
+				throw new Error("Address should belong to user (User reference is missing)");
+		}
+		const {users} = require("src/db/mongo/schema_registry");
+		const isUserExists = await users.exists({_id: v});
+		if (!isUserExists) {
+				throw  new Error("User not found");
+		}
+		return true;
 }, "Address should belong to user (User reference is missing)");
 
 
