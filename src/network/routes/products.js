@@ -17,6 +17,7 @@ product_router.get("/ping", function (req, res, next) {
 // Products
 product_router.post("/", auth_middleware, product_controller_instance.create);
 product_router.get("/", auth_middleware, product_controller_instance.get_all);
+product_router.get("/search/:name", auth_middleware, product_controller_instance.search_by_name);
 product_router.get("/:id", auth_middleware, product_controller_instance.get_by_id);
 product_router.get("/categories/:category_id", auth_middleware, product_controller_instance.find_by_category_id);
 product_router.put("/:id", auth_middleware, product_controller_instance.update);

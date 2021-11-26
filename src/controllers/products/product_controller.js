@@ -85,5 +85,17 @@ ProductController.prototype.delete_by_id = async (req, res, next) => {
 		}
 };
 
+ProductController.prototype.search_by_name = async (req, res, next) => {
+		try {
+				const response = await product_repository.find_by_name(req.params.name);
+				return res
+						.status(STATUS_CODES.OK)
+						.json(response);
+		} catch (e) {
+				loggers.exception(`Failed to delete product with exception ${JSON.stringify(e)}`, __filename);
+				return ExceptionHandler(e, res);
+		}
+};
+
 
 module.exports = new ProductController();

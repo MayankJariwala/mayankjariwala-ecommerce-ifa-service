@@ -68,4 +68,10 @@ ProductRepository.prototype.delete_by_id = async (id) => {
 		return await products.deleteOne({_id: id});
 };
 
+ProductRepository.prototype.find_by_name = async (name) => {
+		return await products.find({"name": `/${name}/`}, {
+				"_v": 0
+		});
+};
+
 module.exports = class_instance;
