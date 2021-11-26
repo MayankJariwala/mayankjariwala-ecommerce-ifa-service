@@ -67,5 +67,16 @@ ProductCategoryController.prototype.delete_by_id = async (req, res, next) => {
 		}
 };
 
+ProductCategoryController.prototype.update = async (req, res, next) => {
+		try {
+				const response = await product_category_repository.update(req.params.id, req.body);
+				return res
+						.status(STATUS_CODES.OK)
+						.json(response);
+		} catch (e) {
+				loggers.exception(`Category Update failed with exception ${JSON.stringify(e)}`, __filename);
+				return ExceptionHandler(e, res);
+		}
+};
 
 module.exports = new ProductCategoryController();

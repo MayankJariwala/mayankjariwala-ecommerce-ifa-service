@@ -11,7 +11,7 @@ const OrderDetailSchema = new Schema({
 						return uuid.v4();
 				}
 		},
-		users: {
+		user_id: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: "users"
 		},

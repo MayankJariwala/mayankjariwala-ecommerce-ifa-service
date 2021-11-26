@@ -22,6 +22,13 @@ ProductRepository.prototype.create = async (product, session) => {
 		return await mongoose_products_model.save({session});
 };
 
+ProductRepository.prototype.update = async (id, product) => {
+		return await products.findByIdAndUpdate({_id: id}, product, {
+				new: true,
+				runValidators: true
+		});
+};
+
 ProductRepository.prototype.get_all = async () => {
 		return await products.find({}, {
 				"__v": 0

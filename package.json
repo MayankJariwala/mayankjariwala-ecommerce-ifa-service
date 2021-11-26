@@ -19,7 +19,8 @@
 	"moment": "2.29.1",
 	"moment-timezone": "0.5.32",
 	"node-cache": "5.1.2",
-	"lodash": "1.0.0"
+	"lodash": "1.0.0",
+	"cors": "2.8.5"
   },
   "workspaces": [
 	"src/"

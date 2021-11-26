@@ -19,6 +19,7 @@ product_router.post("/", auth_middleware, product_controller_instance.create);
 product_router.get("/", auth_middleware, product_controller_instance.get_all);
 product_router.get("/:id", auth_middleware, product_controller_instance.get_by_id);
 product_router.get("/categories/:category_id", auth_middleware, product_controller_instance.find_by_category_id);
+product_router.put("/:id", auth_middleware, product_controller_instance.update);
 product_router.delete("/:id", auth_middleware, product_controller_instance.delete_by_id);
 
 

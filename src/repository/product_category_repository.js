@@ -48,6 +48,16 @@ ProductCategoryRepository.prototype.find_by_id = async (id) => {
 		);
 };
 
+ProductCategoryRepository.prototype.update = async (id, body) => {
+		const response = await product_categories.updateOne({_id: id}, body, {
+				new: true,
+				runValidators: true
+		});
+		loggers.log(__filename, JSON.stringify(response) + " updated to categories collection.");
+		return response;
+};
+
+
 ProductCategoryRepository.prototype.delete_by_id = async (id) => {
 		const count = await count_product_by_category_id(id);
 		if (count > 0) {

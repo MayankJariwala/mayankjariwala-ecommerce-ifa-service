@@ -19,5 +19,6 @@ product_category_router.post("/", auth_middleware, product_category_controller_i
 product_category_router.get("/", auth_middleware, product_category_controller_instance.get_all);
 product_category_router.get("/:id", auth_middleware, product_category_controller_instance.get_by_id);
 product_category_router.delete("/:id", auth_middleware, product_category_controller_instance.delete_by_id);
+product_category_router.patch("/:id", auth_middleware, product_category_controller_instance.update);
 
 module.exports = product_category_router;
