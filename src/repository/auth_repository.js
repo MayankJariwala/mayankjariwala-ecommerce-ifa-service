@@ -63,7 +63,7 @@ AuthRepository.prototype.find_by_email_password = async (login_model) => {
 				throw "Session token updating Failed";
 		}
 		result.session_token = generated_token;
-		const {password, type, ...response} = result._doc;
+		const {password, ...response} = result._doc;
 		return response;
 };
 

@@ -46,7 +46,9 @@ UserRepository.prototype.delete = async (id) => {
 
 UserRepository.prototype.all = async (id) => {
 		return await users.find({}, {
-				"__v": 0
+				"__v": 0,
+				"session_token": 0,
+				"password": 0
 		});
 };
 

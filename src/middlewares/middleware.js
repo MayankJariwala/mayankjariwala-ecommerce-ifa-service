@@ -23,6 +23,7 @@ module.exports = (function () {
 								session_exists(req, res);
 								uuid_exists(req, res);
 								session_token_matches(req, res);
+								has_role_admin();
 								//add extra layer
 								next();
 						} catch (e) {
@@ -33,6 +34,12 @@ module.exports = (function () {
 				}
 		};
 
+		const has_role_admin = function (req, res, next) {
+			if (req.headers["x-session-token"] !== undefined && req.headers["x-session-token"].toString().includes("ad")) {
+					next();
+			}
+				throw new UnauthorizedException();
+		};
 		const auth_middleware = function (req, res, next) {
 				if (`${process.env.SKIP_MIDDLEWARE}` === "false") {
 						try {
