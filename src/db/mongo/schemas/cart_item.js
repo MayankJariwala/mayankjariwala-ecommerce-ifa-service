@@ -26,7 +26,7 @@ const CartItemSchema = new Schema({
 
 CartItemSchema.path("session_id").validate(async function (v) {
 		const {shopping_sessions} = require("src/db/mongo/schema_registry");
-		const isSessionExists = await shopping_sessions.exists({"user_id": v});
+		const isSessionExists = await shopping_sessions.exists({"_id": v});
 		if (!isSessionExists) {
 				throw new GeneralValidationException(`Session id: ${v} not exists`);
 		}

@@ -1,8 +1,13 @@
-const mongoose = require("mongoose/index");
+const mongoose = require("mongoose");
 const {Schema} = mongoose;
-
+const uuid = require("uuid");
+const {GeneralValidationException} = require("src/exceptions/validation_exception");
 
 const OrderDetailSchema = new Schema({
+		reference_number: {
+				type: String,
+				default: uuid.v4()
+		},
 		user_id: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: "users"

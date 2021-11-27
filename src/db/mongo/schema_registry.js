@@ -8,6 +8,7 @@ const {OrderDetailSchema} = require("src/db/mongo/schemas/order_details");
 const {UserPaymentSchema} = require("src/db/mongo/schemas/user_payment");
 const {CartItemSchema} = require("src/db/mongo/schemas/cart_item");
 const {ShoppingSessionSchema} = require("src/db/mongo/schemas/shopping_session");
+const {OrderItemSchema} = require("src/db/mongo/schemas/order_items");
 
 /**
  * @namespace Model
@@ -21,6 +22,7 @@ const mongo_models = {
 		product_categories: mongoose.model("product_categories", ProductCategorySchema),
 		payment_details: mongoose.model("payment_details", PaymentDetailSchema),
 		orders: mongoose.model("orders", OrderDetailSchema),
+		order_items: mongoose.model("order_items", OrderItemSchema),
 		user_payments: mongoose.model("user_payments", UserPaymentSchema),
 		cart_items: mongoose.model("cart_items", CartItemSchema),
 		shopping_sessions: mongoose.model("shopping_sessions", ShoppingSessionSchema)

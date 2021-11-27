@@ -42,7 +42,7 @@ CartRepository.prototype.add_item_in_session = async (add_item_model) => {
 		if (isSessionExists) {
 				try {
 						session.startTransaction();
-						const response = cart_items.exists({$and: [{"session_id": add_item_model.session_id}, {"product_id": add_item_model.product_id}]});
+						const response = await cart_items.exists({$and: [{"session_id": add_item_model.session_id}, {"product_id": add_item_model.product_id}]});
 						if (response) {
 								const update_response = await cart_items.updateOne({
 										"$and": [
@@ -55,16 +55,16 @@ CartRepository.prototype.add_item_in_session = async (add_item_model) => {
 								if (update_response.modifiedCount === 0) {
 										throw new GeneralValidationException("Item updating failed");
 								}
-								const product_response = await products.findOne({"_id": add_item_model.product_id}, {
-										price: 1
-								});
-								await shopping_sessions.updateOne({_id: add_item_model.session_id}, {
-										total: parseInt(add_item_model.quantity) * parseFloat(product_response.price)
-								});
 						} else {
 								const mongoose_cart_items_model = new cart_items(add_item_model);
 								await mongoose_cart_items_model.save();
 						}
+						const product_response = await products.findOne({"_id": add_item_model.product_id}, {
+								price: 1
+						});
+						await shopping_sessions.updateOne({_id: add_item_model.session_id}, {
+								total: parseInt(add_item_model.quantity) * parseFloat(product_response.price)
+						});
 						await session.commitTransaction();
 						return true;
 				} catch (e) {
