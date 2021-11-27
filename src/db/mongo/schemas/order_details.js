@@ -27,7 +27,6 @@ const OrderDetailSchema = new Schema({
 		type: 1
 });
 
-
 OrderDetailSchema.path("user_id").validate(async function (v) {
 		const {users} = require("src/db/mongo/schema_registry");
 		const isUserExists = await users.exists({_id: v});

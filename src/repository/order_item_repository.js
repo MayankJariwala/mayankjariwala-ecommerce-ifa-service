@@ -3,7 +3,7 @@
  * @author Mayank Jariwala
  * @version 1.0.0
  */
-const {orders, shopping_sessions, cart_items, order_items} = require("src/db/mongo/schema_registry");
+const {orders, cart_items, order_items} = require("src/db/mongo/schema_registry");
 const cart_repository = require("src/repository/cart_repository");
 
 /**
@@ -29,7 +29,7 @@ OrderItemRepository.prototype.create = async (order_id, user_id, session_id, ses
 		let order_items_array = [];
 		let order_total = 0;
 		for (let i = 0; i < cart_items_response.length; i++) {
-				order_total += cart_items_response[i]["quantity"]*cart_items_response[i]["price"];
+				order_total += cart_items_response[i]["quantity"] * cart_items_response[i]["price"];
 				order_items_array[i] = Object.assign(
 						{},
 						{
@@ -45,6 +45,16 @@ OrderItemRepository.prototype.create = async (order_id, user_id, session_id, ses
 		await orders.updateOne({"_id": order_id}, {
 				total: order_total
 		}).session(session);
+		for (let i = 0; i < order_items_array.length; i++) {
+				const product_id = order_items_array[i]["product_id"];
+				const ordered_quantity = order_items_array[i]["quantity"];
+				await orders.updateOne({"_id": product_id}, {
+								"$set": {
+										quantity: this.quantity - ordered_quantity
+								}
+						}
+				).session(session);
+		}
 		await cart_repository.delete_session(session_id);
 		return true;
 };

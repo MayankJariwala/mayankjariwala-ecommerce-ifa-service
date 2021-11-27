@@ -20,7 +20,10 @@ OrderRepository.prototype.create = async (order_model, session) => {
 		if (!order_model.hasOwnProperty("session_id") || order_model.session_id === "" || order_model.session_id === undefined) {
 				throw new GeneralValidationException("Some problem with existing session. Please start a new session");
 		}
-		const isSessionExists = await shopping_sessions.exists({"session_id": order_model.session_id});
+		const isSessionExists = await shopping_sessions.exists({
+				"session_id": order_model.session_id,
+				"user_id": order_model.user_id
+		});
 		if (isSessionExists) {
 				const mongoose_order_model = new orders(order_model);
 				const saved_order = await mongoose_order_model.save({session});
@@ -30,25 +33,63 @@ OrderRepository.prototype.create = async (order_model, session) => {
 				}
 				return order_id;
 		}
-		throw new GeneralValidationException("Session not exists");
+		throw new GeneralValidationException("Session not exists with corresponding user");
 };
 
 OrderRepository.prototype.all = async () => {
 		return await orders.aggregate([
 				{
 						"$lookup": {
-								from: "order_items", // collection name in db
+								from: "order_items",
 								localField: "_id",
 								foreignField: "order_id",
 								as: "items"
 						}
 				},
 				{
+						"$lookup": {
+								from: "user_payments",
+								localField: "payment_id",
+								foreignField: "_id",
+								as: "payment_info"
+						}
+				},
+				{
+						"$lookup": {
+								from: "users",
+								localField: "user_id",
+								foreignField: "_id",
+								as: "user_info"
+						}
+				},
+				{$unwind: "$payment_info"},
+				{$unwind: "$user_info"},
+				{
 						$project: {
 								"__v": 0,
+								"payment_id": 0,
+								"user_id": 0,
 								"items": {
 										"_id": 0,
 										"__v": 0,
+										"createdAt": 0,
+										"updatedAt": 0
+								},
+								"user_info": {
+										"_id": 0,
+										"__v": 0,
+										"password": 0,
+										"session_token": 0,
+										"createdAt": 0,
+										"updatedAt": 0
+								},
+								"payment_info": {
+										"_id": 0,
+										"user_id": 0,
+										"__v": 0,
+										"cvv": 0,
+										"expiry_month": 0,
+										"expiry_year": 0,
 										"createdAt": 0,
 										"updatedAt": 0
 								}
@@ -68,18 +109,65 @@ OrderRepository.prototype.find_by_id = async (order_id) => {
 				},
 				{
 						"$lookup": {
-								from: "order_items", // collection name in db
+								from: "order_items",
 								localField: "_id",
 								foreignField: "order_id",
 								as: "items"
 						}
 				},
+				// {
+				// 		"$lookup": {
+				// 				from: "products",
+				// 				localField: "_id",
+				// 				foreignField: "product_id",
+				// 				as: "product_info"
+				// 		}
+				// },
+				{
+						"$lookup": {
+								from: "user_payments",
+								localField: "payment_id",
+								foreignField: "_id",
+								as: "payment_info"
+						}
+				},
+				{
+						"$lookup": {
+								from: "users",
+								localField: "user_id",
+								foreignField: "_id",
+								as: "user_info"
+						}
+				},
+				{$unwind: "$payment_info"},
+				{$unwind: "$user_info"},
+				// {$unwind: "$product_info"},
 				{
 						$project: {
 								"__v": 0,
+								"payment_id": 0,
+								"user_id": 0,
 								"items": {
 										"_id": 0,
 										"__v": 0,
+										"createdAt": 0,
+										"updatedAt": 0
+								},
+								"user_info": {
+										"_id": 0,
+										"__v": 0,
+										"password": 0,
+										"session_token": 0,
+										"createdAt": 0,
+										"updatedAt": 0
+								},
+								"payment_info": {
+										"_id": 0,
+										"user_id": 0,
+										"__v": 0,
+										"cvv": 0,
+										"expiry_month": 0,
+										"expiry_year": 0,
 										"createdAt": 0,
 										"updatedAt": 0
 								}
