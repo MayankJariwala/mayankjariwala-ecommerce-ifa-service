@@ -70,6 +70,8 @@ NOTE: Because of timeline there is no specific naming conventions and design pat
 **In order to allow heroku to use different env files, update the environment variable of NODE_ENV or 
 add NODE_ENV in config from Heroku dashboard**
 
+Naive Way to Deploy:
+Ref: https://devcenter.heroku.com/articles/github-integration
 
 **To add accounts:**
 ```
@@ -86,22 +88,22 @@ heroku accounts:set <account_name>
 
 **Heroku Accounts:**
     
-    - test (API KEY: 41946450-2298-4db8-8300-3771374077d2)
+    - test (API KEY: xxxxxxxxxxxxxx)
     
 **Heroku Git Origin :**
     
-    - heroku-test (cmd: git push heroku-test master)
+    - heroku-test (cmd: git push heroku master)
 
     
-Pre-Production Environment:
+Environment:
 
     - URL: <<URL>>
     - Email: <<EMAIL>>
-    - Password: Ask Product Owner
+    - Password: <<PASSWORD>>
 
 
 ### Deploy to heroku server using bash script
-``` cd deployments && ./service.sh << prod|test|preprod >> <<current_branch>>```
+``` bash ./service.sh```
 
 - Merge or push to **release/app** branch in order to run pipeline and deploying to production
 
