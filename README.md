@@ -27,6 +27,27 @@ NOTE: Because of timeline there is no specific naming conventions and design pat
 ### Environment files
     - .env.local
 
+### Functionality
+
+1. Register ( Admin or User)
+2. Login
+3. CRUD Product
+4. CRUD Product Category
+5. CRUD User/User Address/User Payment Registration
+6. Search Product by name
+7. Start/DELETE Session
+8. Add Items To CART
+10. Convert CART to ORDER
+11. View ORDERS/ ORDERS ITEMS
+
+
+### Middleware
+1. Create/Update/Delete Product - can only be perform by admin
+2. Create/Update/Delete Product Category - can only be perform by admin
+3. Read Product and Read Category - can only be perform by any user with token
+4. REGISTER/LOGIN - Any user
+
+
 ### Heroku Deployments
 
 **In order to allow heroku to use different env files, update the environment variable of NODE_ENV or 
@@ -66,3 +87,4 @@ Pre-Production Environment:
 ``` cd deployments && ./service.sh << prod|test|preprod >> <<current_branch>>```
 
 - Merge or push to **release/app** branch in order to run pipeline and deploying to production
+
