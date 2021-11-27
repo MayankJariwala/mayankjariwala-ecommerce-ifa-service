@@ -51,7 +51,6 @@ CartRepository.prototype.add_item_in_session = async (add_item_model) => {
 										],
 										"$set": add_item_model
 								});
-								console.log(update_response);
 								if (update_response.modifiedCount === 0) {
 										throw new GeneralValidationException("Item updating failed");
 								}

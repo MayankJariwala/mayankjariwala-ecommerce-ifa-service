@@ -14,10 +14,12 @@ function CartController() {
 
 CartController.prototype.create_session = async (req, res, next) => {
 		try {
-				await cart_repository.create_session(req.body);
+				const response = await cart_repository.create_session(req.body);
 				return res
 						.status(STATUS_CODES.OK)
-						.json(response_payload(200, "Session Started"));
+						.json(response_payload(200, "Session Started", {
+								session_id: response._id
+						}));
 		} catch (e) {
 				loggers.log(__filename, `Shopping Session failed ${e}`);
 				return ExceptionHandler(e, res);

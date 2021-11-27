@@ -9,10 +9,6 @@ const ShoppingSessionSchema = new Schema({
 				ref: "users",
 				required: true
 		},
-		total: {
-				type: Number,
-				default: 0
-		}
 }, {
 		useNestedStrict: true,
 		timestamps: true

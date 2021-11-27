@@ -27,8 +27,33 @@ OrderController.prototype.create_order = async (req, res, next) => {
 						.status(STATUS_CODES.OK)
 						.json(response_payload(200, "Order Placed"));
 		} catch (e) {
-			session.inTransaction() && await session.abortTransaction();
+				session.inTransaction() && await session.abortTransaction();
 				loggers.log(__filename, `Order Creation failed ${e}`);
+				return ExceptionHandler(e, res);
+		}
+};
+
+OrderController.prototype.get_all_orders = async (req, res, next) => {
+		try {
+				const orders = await order_repository.all();
+				return res
+						.status(STATUS_CODES.OK)
+						.json(orders);
+		} catch (e) {
+				loggers.log(__filename, `Fetching orders failed ${e}`);
+				return ExceptionHandler(e, res);
+		}
+};
+
+OrderController.prototype.get_order_by_id = async (req, res, next) => {
+		try {
+				const orders = await order_repository.find_by_id(req.params.id);
+				console.log(orders);
+				return res
+						.status(STATUS_CODES.OK)
+						.json(orders);
+		} catch (e) {
+				loggers.log(__filename, `Fetching order by id failed ${e}`);
 				return ExceptionHandler(e, res);
 		}
 };

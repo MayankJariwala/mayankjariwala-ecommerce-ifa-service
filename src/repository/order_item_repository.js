@@ -16,12 +16,6 @@ function OrderItemRepository() {
 const class_instance = new OrderItemRepository();
 
 OrderItemRepository.prototype.create = async (order_id, user_id, session_id, session) => {
-		const shopping_response = await shopping_sessions.findOne({
-				"$and": [
-						{"user_id": user_id}
-				]
-		}, {total: 1});
-		// console.log(shopping_response);
 		const cart_items_response = await cart_items.find({
 				"$and": [
 						{"session_id": session_id}
@@ -29,20 +23,27 @@ OrderItemRepository.prototype.create = async (order_id, user_id, session_id, ses
 		}, {
 				_id: 0,
 				product_id: 1,
-				quantity: 1
+				quantity: 1,
+				price: 1
 		});
 		let order_items_array = [];
+		let order_total = 0;
 		for (let i = 0; i < cart_items_response.length; i++) {
+				order_total += cart_items_response[i]["quantity"]*cart_items_response[i]["price"];
 				order_items_array[i] = Object.assign(
 						{},
-						{"product_id": cart_items_response[i]["product_id"], "quantity": cart_items_response[i]["quantity"]},
+						{
+								"product_id": cart_items_response[i]["product_id"],
+								"quantity": cart_items_response[i]["quantity"],
+								"price": cart_items_response[i]["price"]
+						},
 						{"order_id": order_id}
 				);
 		}
 		await order_items.deleteMany({"_id": order_id}).session(session);
 		await order_items.insertMany(order_items_array, {session});
 		await orders.updateOne({"_id": order_id}, {
-				total: shopping_response.total
+				total: order_total
 		}).session(session);
 		await cart_repository.delete_session(session_id);
 		return true;

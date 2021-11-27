@@ -17,6 +17,10 @@ const OrderItemSchema = new Schema({
 		quantity: {
 				type: Number,
 				default: 0
+		},
+		price: {
+				type: Number,
+				default: 0
 		}
 }, {
 		useNestedStrict: true,
