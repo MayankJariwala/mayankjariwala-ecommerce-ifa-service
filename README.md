@@ -4,6 +4,9 @@
 NOTE: Because of timeline there is no specific naming conventions and design patterns followed.
 ```
 
+### Postman Collection file
+- postman.json
+
 #### Local Command: 
 ```yarn start-local```
 
@@ -48,6 +51,20 @@ NOTE: Because of timeline there is no specific naming conventions and design pat
 4. REGISTER/LOGIN - Any user
 
 
+#### SEQUENCE TO RUN API
+``` NOTE: All requests except auth request needs x-session-token and x-user-id in headers ``` 
+ - Register (register)
+ - Login (login)
+ - Add User Address (UserAddress)
+ - Add User Payment (PaymentRegistration)
+ - Create Product Categories (Category)
+ - Create Product (Should belong to one category id) (products)
+ - Start Session (Cart Session)
+ - Add Item to cart (AddItemToCArt)
+ - Order Create (OrderCreate) [on successfully creation - cart session is deleted]
+ - Get Orders
+ 
+  
 ### Heroku Deployments
 
 **In order to allow heroku to use different env files, update the environment variable of NODE_ENV or 

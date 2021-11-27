@@ -42,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Hair Care\",\n    \"description\": \"\",\n    \"sku\": \"HC01\",\n    \"images\":[\n        \"https://static.thcdn.com/images/large/webp//productimg/1600/1600/12689294-1184870218086574.jpg\"\n    ],\n    \"category_id\": [\n        \"61a15812e9314841a42e19f8\"\n    ],\n    \"price\": 90,\n    \"quantity\": 10.09\n}",
+					"raw": "{\n    \"name\": \"Hair Care Product 2\",\n    \"description\": \"\",\n    \"sku\": \"HC02\",\n    \"images\":[\n        \"https://static.thcdn.com/images/large/webp//productimg/1600/1600/12689294-1184870218086574.jpg\"\n    ],\n    \"category_id\": [\n        \"61a15812e9314841a42e19f8\"\n    ],\n    \"price\": 10,\n    \"quantity\": 50\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -100,7 +100,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"mayank@fornaxhq.co\",\n    \"password\": \"M@Test123\"\n}",
+					"raw": "{\n    \"email\": \"aditya@fornaxhq.co\",\n    \"password\": \"aditya123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -592,7 +592,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"user_id\": \"61a1571bb9b1c2914992aebb\"\n}",
+					"raw": "{\n    \"user_id\": \"61a2815fa9acd39502e2ee5f\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -621,7 +621,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"session_id\": \"61a16b2f903b7328073e08f6\",\n    \"product_id\": \"61a1581ce9314841a42e19fb\",\n    \"quantity\": 3\n}",
+					"raw": "{\n    \"session_id\": \"61a297aed39662e66a3c8654\",\n    \"product_id\": \"61a1581ce9314841a42e19fb\",\n    \"quantity\": 5,\n    \"price\": 90\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -671,7 +671,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"session_id\": \"61a16b2f903b7328073e08f6\",\n    \"user_id\": \"61a1571bb9b1c2914992aebb\",\n    \"payment_id\": \"61a16b8945a4f81dddd0a0f9\"\n}",
+					"raw": "{\n    \"session_id\": \"61a297aed39662e66a3c8654\",\n    \"user_id\": \"61a2815fa9acd39502e2ee5f\",\n    \"payment_id\": \"61a16b8945a4f81dddd0a0f9\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -688,6 +688,47 @@
 					"path": [
 						"v1",
 						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OrderById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/orders/61a29a96ef3907d208d537ef",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"orders",
+						"61a29a96ef3907d208d537ef"
 					]
 				}
 			},
