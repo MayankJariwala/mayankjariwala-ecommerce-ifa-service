@@ -3,8 +3,10 @@
  * @author Mayank Jariwala
  * @version 1.0.0
  */
-const {orders, cart_items, order_items} = require("src/db/mongo/schema_registry");
+const {orders, cart_items, order_items, products} = require("src/db/mongo/schema_registry");
 const cart_repository = require("src/repository/cart_repository");
+const {GeneralValidationException} = require("src/exceptions/validation_exception");
+
 
 /**
  * Important Tag: Do not remove it
@@ -40,24 +42,33 @@ OrderItemRepository.prototype.create = async (order_id, user_id, session_id, ses
 						{"order_id": order_id}
 				);
 		}
-		await order_items.deleteMany({"_id": order_id}).session(session);
-		await order_items.insertMany(order_items_array, {session});
-		await orders.updateOne({"_id": order_id}, {
-				total: order_total
-		}).session(session);
+		await class_instance.delete_many(order_id, session);
+		await class_instance.insert_many(order_items_array, session);
+		await class_instance.update(order_id, {total: order_total}, session);
 		for (let i = 0; i < order_items_array.length; i++) {
 				const product_id = order_items_array[i]["product_id"];
 				const ordered_quantity = order_items_array[i]["quantity"];
-				await orders.updateOne({"_id": product_id}, {
-								"$set": {
-										quantity: this.quantity - ordered_quantity
-								}
-						}
-				).session(session);
+				const product_response = await products.findOne({_id: product_id});
+				if (ordered_quantity > product_response.quantity) {
+						throw new GeneralValidationException(`${ordered_quantity} qty not available for Product ${product_response.name} [Available: ${product_response.quantity}]`);
+				}
+				product_response.quantity = product_response.quantity - ordered_quantity;
+				await product_response.save({session});
 		}
 		await cart_repository.delete_session(session_id);
 		return true;
 };
 
+OrderItemRepository.prototype.delete_many = async (order_id, session) => {
+		return await order_items.deleteMany({"_id": order_id}).session(session);
+};
+
+OrderItemRepository.prototype.update = async (order_id, model, session) => {
+		return await orders.updateOne({"_id": order_id}, model).session(session);
+};
+
+OrderItemRepository.prototype.insert_many = async (order_items_array, session) => {
+		return await order_items.insertMany(order_items_array, {session});
+};
 
 module.exports = class_instance;

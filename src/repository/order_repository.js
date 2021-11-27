@@ -115,14 +115,6 @@ OrderRepository.prototype.find_by_id = async (order_id) => {
 								as: "items"
 						}
 				},
-				// {
-				// 		"$lookup": {
-				// 				from: "products",
-				// 				localField: "_id",
-				// 				foreignField: "product_id",
-				// 				as: "product_info"
-				// 		}
-				// },
 				{
 						"$lookup": {
 								from: "user_payments",
@@ -141,7 +133,6 @@ OrderRepository.prototype.find_by_id = async (order_id) => {
 				},
 				{$unwind: "$payment_info"},
 				{$unwind: "$user_info"},
-				// {$unwind: "$product_info"},
 				{
 						$project: {
 								"__v": 0,
