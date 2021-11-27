@@ -1,0 +1,697 @@
+{
+	"info": {
+		"_postman_id": "0fd192f9-31a2-460b-b732-e69165a40a51",
+		"name": "interview_indegenious",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Shreya\",\n    \"last_name\": \"Patel\",\n    \"email\": \"shreya@fornaxhq.co\",\n    \"username\": \"shreyank\",\n    \"password\": \"Shreya@123\",\n    \"mobile\": \"8980430366\",\n    \"type\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Hair Care\",\n    \"description\": \"\",\n    \"sku\": \"HC01\",\n    \"images\":[\n        \"https://static.thcdn.com/images/large/webp//productimg/1600/1600/12689294-1184870218086574.jpg\"\n    ],\n    \"category_id\": [\n        \"61a15812e9314841a42e19f8\"\n    ],\n    \"price\": 90,\n    \"quantity\": 10.09\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Category 1\",\n    \"description\": \"Category 1 description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"mayank@fornaxhq.co\",\n    \"password\": \"M@Test123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/v1/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/v1/products",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/v1/products/619ff7e7187819bdab01822c",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"products",
+						"619ff7e7187819bdab01822c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductCategories",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-session-token",
+						"value": "ad-MDLNxduXAfDPI2JTUqyLYz3r6",
+						"type": "text"
+					},
+					{
+						"key": "x-user-id",
+						"value": "cfc22c26-9892-4b3f-9e4b-855dd0968948",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/v1/categories",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductCategoriesById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/v1/categories/619ff7cf187819bdab01822a",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"categories",
+						"619ff7cf187819bdab01822a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product By Category Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/products/categories/619ff7cf187819bdab01822a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"products",
+						"categories",
+						"619ff7cf187819bdab01822a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteProductcategoryById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/v1/categories/619ff7cf187819bdab01822a",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"categories",
+						"619ff7cf187819bdab01822a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteProductById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/v1/products/619ff7e7187819bdab01822c",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"products",
+						"619ff7e7187819bdab01822c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateCategories",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Category 1\",\n    \"description\": \"Category 1 description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/v1/categories/61a043d001947892a6548371",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"categories",
+						"61a043d001947892a6548371"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateProducts",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Hair Care\",\n    \"description\": \"\",\n    \"sku\": \"HC01\",\n    \"category_id\": [\n        \"61a049267720f55e9af86984\"\n    ],\n    \"username\": \"menickwa\",\n    \"price\": 90,\n    \"quantity\": 10.09\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/products/61a052a87720f55e9af869c1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"products",
+						"61a052a87720f55e9af869c1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentRegistration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"61a1571bb9b1c2914992aebb\",\n    \"provider\": \"ICICI\",\n    \"card_number\": \"6762454567933936\",\n    \"expiry_month\": 12,\n    \"expiry_year\": 2022,\n    \"cvv\": \"012\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentUpdate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"619fd7a69d75df85c938a9ff\",\n    \"provider\": \"ICICI\",\n    \"card_number\": \"4508697159111048\",\n    \"expiry\": \"05/22\",\n    \"cvv\": \"192\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/payments/61a1344c6f76829f4dfa96d0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"payments",
+						"61a1344c6f76829f4dfa96d0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserPayments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/payments/61a13ea3fabe1ca71be3dd02",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"payments",
+						"61a13ea3fabe1ca71be3dd02"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserAddress",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"619fd7a69e75df85c938a9ff\",\n    \"address_line_1\": \"60 absolute ave\",\n    \"address_line_2\": \"\",\n    \"city\": \"Mississuaga, Ontario\",\n    \"postal_code\": \"l4z0a9\",\n    \"country\": \"Toronto\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/users/address",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"users",
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateAddress",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"619fd7a69d75df85c938a9ff\",\n    \"address_line_1\": \"60 absolute ave\",\n    \"address_line_2\": \"\",\n    \"city\": \"Mississuaga, Ontario\",\n    \"postal_code\": \"l4z0a9\",\n    \"country\": \"Canada\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/users/address/61a14fcc107d4fef28d90c71",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"users",
+						"address",
+						"61a14fcc107d4fef28d90c71"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserAddresses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/users/address/619fd7a69e75df85c938a9ff",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"users",
+						"address",
+						"619fd7a69e75df85c938a9ff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAddress",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/users/address/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"users",
+						"address",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/v1/users/619fd7a69d75df85c938a9ff",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"users",
+						"619fd7a69d75df85c938a9ff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/v1/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductByName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/v1/products/search/Test",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"products",
+						"search",
+						"Test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CartSession",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"61a1571bb9b1c2914992aebb\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/v1/carts/session",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"carts",
+						"session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddItemToCart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"session_id\": \"61a16b2f903b7328073e08f6\",\n    \"product_id\": \"61a1581ce9314841a42e19fb\",\n    \"quantity\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/v1/carts/item",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"carts",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletesession",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/v1/carts/session/61a15725b9b1c2914992aebe",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"carts",
+						"session",
+						"61a15725b9b1c2914992aebe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OrderCreate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"session_id\": \"61a16b2f903b7328073e08f6\",\n    \"user_id\": \"61a1571bb9b1c2914992aebb\",\n    \"payment_id\": \"61a16b8945a4f81dddd0a0f9\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/v1/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
