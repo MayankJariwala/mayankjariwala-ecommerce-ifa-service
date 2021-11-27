@@ -7,11 +7,12 @@
 #MODIFICATION: One may change the respected branch for various env.
 
 function upload_to_heroku() {
-      heroku accounts:set prod
-      git checkout -f master
-      git pull origin master
-      git push heroku-prod master
-      git checkout $1
+       yarn install
+#      heroku accounts:set prod
+#      git checkout -f master
+#      git pull origin master
+#      git push heroku-prod master
+#      git checkout $1
 }
 
 
