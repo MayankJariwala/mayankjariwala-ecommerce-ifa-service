@@ -15,4 +15,4 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: cd deployments/ &&  sh ./services.sh
+    - run: cd ../deployments/ &&  sh ./services.sh
