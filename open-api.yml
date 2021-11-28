@@ -73,7 +73,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/auth/login:
+  /v1/auth/login:
     post:
       tags:
         - General
@@ -91,7 +91,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/products:
+  /v1/products:
     get:
       tags:
         - General
@@ -101,7 +101,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/products/619ff7e7187819bdab01822c:
+  /v1/products/619ff7e7187819bdab01822c:
     get:
       tags:
         - General
@@ -120,7 +120,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/categories:
+  /v1/categories:
     get:
       tags:
         - General
@@ -141,7 +141,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/categories/619ff7cf187819bdab01822a:
+  /v1/categories/619ff7cf187819bdab01822a:
     get:
       tags:
         - General
@@ -170,7 +170,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/categories/61a043d001947892a6548371:
+  /v1/categories/61a043d001947892a6548371:
     patch:
       tags:
         - General
@@ -335,7 +335,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/users/619fd7a69d75df85c938a9ff:
+  /v1/users/619fd7a69d75df85c938a9ff:
     delete:
       tags:
         - General
@@ -355,7 +355,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/products/search/Test:
+  /v1/products/search/Test:
     get:
       tags:
         - General
@@ -365,7 +365,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/carts/session:
+  /v1/carts/session:
     post:
       tags:
         - General
@@ -382,7 +382,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/carts/item:
+  /v1/carts/item:
     post:
       tags:
         - General
@@ -402,7 +402,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /000/v1/carts/session/61a15725b9b1c2914992aebe:
+  /v1/carts/session/61a15725b9b1c2914992aebe:
     delete:
       tags:
         - General
