@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var app = require("app");
+var app = require("../app");
 var http = require("http");
 const config = require("src/config/mapper");
 const loggers = require("src/utils/loggers");
