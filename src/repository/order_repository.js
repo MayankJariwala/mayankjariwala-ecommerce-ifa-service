@@ -76,7 +76,6 @@ OrderRepository.prototype.all = async () => {
 										"updatedAt": 0
 								},
 								"user_info": {
-										"_id": 0,
 										"__v": 0,
 										"password": 0,
 										"session_token": 0,
