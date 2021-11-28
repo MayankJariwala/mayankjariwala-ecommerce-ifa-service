@@ -24,9 +24,11 @@ jobs:
   deploy-to-heroku:
     runs-on: ubuntu-latest
     steps:
-      - name: "GIT INIT"
-        run: git init
       - name: "Install Dependencies"
         run: yarn install
-      - name: "Push to Heroku"
-        run: git push https://heroku:b9349584-46f9-44f1-a4c7-7d95454600e3@git.heroku.com/ecommerce-service-ifa.git
+      - name: "Run bash"
+        run: |
+          chmod +x ./services.sh
+          ./services.sh
+#      - name: "Push to Heroku"
+#        run: git push https://heroku:b9349584-46f9-44f1-a4c7-7d95454600e3@git.heroku.com/ecommerce-service-ifa.git
