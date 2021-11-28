@@ -1,7 +1,16 @@
 # E-Commerce Services
 
+
+Current code layers communication:
+
+```Routes ---> Middleware ---> Controller ---> Mongoose Models validation ---> Repository ---> DB```
+
+Better code layer communication:
+
+![Better Architecture](Version2.drawio.png)
+
 ```
-NOTE: Because of timeline there is no specific naming conventions and design patterns followed.
+NOTE: Because of timeline failed to add design patterns.
 ```
 
 ### Postman Collection file
