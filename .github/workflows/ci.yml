@@ -24,6 +24,8 @@ jobs:
   deploy-to-heroku:
     runs-on: ubuntu-latest
     steps:
+      - name: "GIT INIT"
+        run: git init
       - name: "Install Dependencies"
         run: yarn install
       - name: "Push to Heroku"
