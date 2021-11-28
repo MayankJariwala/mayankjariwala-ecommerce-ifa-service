@@ -1,18 +1,21 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Node.js CI
-
+image: node:10.15.3
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+clone:
+  depth: full
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - run: bash ./services.sh
+  branches:
+    main:
+      - step:
+          name: "Deploying to Production Heroku App"
+          deployment: production
+          script:
+            - yarn install
+            - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD
