@@ -8,9 +8,8 @@ on:
     branches: [ main ]
 
 jobs:
-  - step:
-      name: "Deploying to Production Heroku App"
-      deployment: production
-      script:
-        - yarn install
-        - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD
+  build:
+    steps:
+      - uses: node:10.15.3
+      - run: yarn install
+      - run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD
