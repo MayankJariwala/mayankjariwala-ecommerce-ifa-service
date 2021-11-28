@@ -1,0 +1,452 @@
+openapi: 3.0.0
+info:
+  title: interview_indegenious
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+  - url: localhost://
+paths:
+  /v1/auth/register:
+    post:
+      tags:
+        - General
+      summary: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                first_name: Shreya
+                last_name: Patel
+                email: shreya@fornaxhq.co
+                username: shreyank
+                password: Shreya@123
+                mobile: '8980430366'
+                type: admin
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/products:
+    post:
+      tags:
+        - General
+      summary: products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Hair Care Product 2
+                description: ''
+                sku: HC02
+                images:
+                  - >-
+                    https://static.thcdn.com/images/large/webp//productimg/1600/1600/12689294-1184870218086574.jpg
+                category_id:
+                  - 61a15812e9314841a42e19f8
+                price: 10
+                quantity: 50
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/categories:
+    post:
+      tags:
+        - General
+      summary: Category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Category 1
+                description: Category 1 description
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/auth/login:
+    post:
+      tags:
+        - General
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: aditya@fornaxhq.co
+                password: aditya123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/products:
+    get:
+      tags:
+        - General
+      summary: Get All Products
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/products/619ff7e7187819bdab01822c:
+    get:
+      tags:
+        - General
+      summary: ProductById
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - General
+      summary: DeleteProductById
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/categories:
+    get:
+      tags:
+        - General
+      summary: ProductCategories
+      parameters:
+        - name: x-session-token
+          in: header
+          schema:
+            type: string
+          example: ad-MDLNxduXAfDPI2JTUqyLYz3r6
+        - name: x-user-id
+          in: header
+          schema:
+            type: string
+          example: cfc22c26-9892-4b3f-9e4b-855dd0968948
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/categories/619ff7cf187819bdab01822a:
+    get:
+      tags:
+        - General
+      summary: ProductCategoriesById
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - General
+      summary: DeleteProductcategoryById
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/products/categories/619ff7cf187819bdab01822a:
+    get:
+      tags:
+        - General
+      summary: Get Product By Category Id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/categories/61a043d001947892a6548371:
+    patch:
+      tags:
+        - General
+      summary: UpdateCategories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Category 1
+                description: Category 1 description
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/products/61a052a87720f55e9af869c1:
+    put:
+      tags:
+        - General
+      summary: UpdateProducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Hair Care
+                description: ''
+                sku: HC01
+                category_id:
+                  - 61a049267720f55e9af86984
+                username: menickwa
+                price: 90
+                quantity: 10.09
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/payments:
+    post:
+      tags:
+        - General
+      summary: PaymentRegistration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user_id: 61a1571bb9b1c2914992aebb
+                provider: ICICI
+                card_number: '6762454567933936'
+                expiry_month: 12
+                expiry_year: 2022
+                cvv: '012'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/payments/61a1344c6f76829f4dfa96d0:
+    put:
+      tags:
+        - General
+      summary: PaymentUpdate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user_id: 619fd7a69d75df85c938a9ff
+                provider: ICICI
+                card_number: '4508697159111048'
+                expiry: 05/22
+                cvv: '192'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/payments/61a13ea3fabe1ca71be3dd02:
+    get:
+      tags:
+        - General
+      summary: UserPayments
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/users/address:
+    post:
+      tags:
+        - General
+      summary: UserAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user_id: 619fd7a69e75df85c938a9ff
+                address_line_1: 60 absolute ave
+                address_line_2: ''
+                city: Mississuaga, Ontario
+                postal_code: l4z0a9
+                country: Toronto
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/users/address/61a14fcc107d4fef28d90c71:
+    put:
+      tags:
+        - General
+      summary: UpdateAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user_id: 619fd7a69d75df85c938a9ff
+                address_line_1: 60 absolute ave
+                address_line_2: ''
+                city: Mississuaga, Ontario
+                postal_code: l4z0a9
+                country: Canada
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/users/address/619fd7a69e75df85c938a9ff:
+    get:
+      tags:
+        - General
+      summary: UserAddresses
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/users/address/{id}:
+    delete:
+      tags:
+        - General
+      summary: DeleteAddress
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/users/619fd7a69d75df85c938a9ff:
+    delete:
+      tags:
+        - General
+      summary: DeleteUser
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/users/:
+    get:
+      tags:
+        - General
+      summary: AllUsers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/products/search/Test:
+    get:
+      tags:
+        - General
+      summary: ProductByName
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/carts/session:
+    post:
+      tags:
+        - General
+      summary: CartSession
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user_id: 61a2815fa9acd39502e2ee5f
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/carts/item:
+    post:
+      tags:
+        - General
+      summary: AddItemToCart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                session_id: 61a297aed39662e66a3c8654
+                product_id: 61a1581ce9314841a42e19fb
+                quantity: 5
+                price: 90
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/v1/carts/session/61a15725b9b1c2914992aebe:
+    delete:
+      tags:
+        - General
+      summary: deletesession
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/orders:
+    post:
+      tags:
+        - General
+      summary: OrderCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                session_id: 61a297aed39662e66a3c8654
+                user_id: 61a2815fa9acd39502e2ee5f
+                payment_id: 61a16b8945a4f81dddd0a0f9
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - General
+      summary: Get orders
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/orders/61a29a96ef3907d208d537ef:
+    get:
+      tags:
+        - General
+      summary: OrderById
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

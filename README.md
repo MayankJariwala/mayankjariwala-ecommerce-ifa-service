@@ -1,5 +1,6 @@
 # E-Commerce Services
 
+Heroku URL:  https://ecommerce-service-ifa.herokuapp.com/
 
 Current code layers communication:
 
@@ -13,8 +14,9 @@ Better code layer communication:
 NOTE: Because of timeline failed to add design patterns.
 ```
 
-### Postman Collection file
+### Postman Collection and YAML file
 - postman.json
+- open-api.yml
 
 #### Local Command: 
 ```yarn start-local```
