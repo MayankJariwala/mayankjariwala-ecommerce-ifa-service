@@ -17,7 +17,9 @@ on:
         type: string
         required: false
         default: Pipeline
-
+env:
+  HEROKU_APP_NAME: ecommerce-service-ifa
+  HEROKU_API_KEY: b9349584-46f9-44f1-a4c7-7d95454600e3
 jobs:
   deploy-to-heroku:
     runs-on: ubuntu-latest
