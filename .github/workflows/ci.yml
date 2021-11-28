@@ -28,6 +28,7 @@ jobs:
         run: yarn install
       - name: "Run bash"
         run: |
+          ls
           chmod +x ./services.sh
           ./services.sh
 #      - name: "Push to Heroku"
