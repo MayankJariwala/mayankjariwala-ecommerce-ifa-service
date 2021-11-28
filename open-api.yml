@@ -3,7 +3,7 @@ info:
   title: interview_indegenious
   version: 1.0.0
 servers:
-  - url: http://localhost:5000
+  - url: https://ecommerce-service-ifa.herokuapp.com/
   - url: localhost://
 paths:
   /v1/auth/register:
