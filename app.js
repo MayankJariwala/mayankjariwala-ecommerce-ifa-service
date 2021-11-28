@@ -3,6 +3,10 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
+
+const swaggerDocument = YAML.load("./open-api.yml");
 
 var auth_router = require("src/network/routes/auth");
 var products_router = require("src/network/routes/products");
@@ -22,7 +26,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use("/", indexRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/v1/auth", auth_router);
 app.use("/v1/products", products_router);
 app.use("/v1/users", users_router);

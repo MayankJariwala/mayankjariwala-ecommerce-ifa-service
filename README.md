@@ -1,6 +1,8 @@
 # E-Commerce Services
 
 Heroku URL:  https://ecommerce-service-ifa.herokuapp.com/
+API DOCS: https://ecommerce-service-ifa.herokuapp.com/api-docs
+
 
 Current code layers communication:
 
